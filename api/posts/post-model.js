@@ -1,3 +1,5 @@
+const db = require('../../data/db-config');
+
 module.exports = {
   get,
   getById,
@@ -6,22 +8,27 @@ module.exports = {
   remove,
 }
 
-function get() {
-  return Promise.resolve('get wired')
+async function get() {
+  const sql = await db('posts').toString();
+  console.log(sql);
+  return db('posts');
+  // return Promise.resolve('get wired')
 }
 
-function getById() {
-  return Promise.resolve('getById wired')
+function getById(id) {
+  const post = db('posts').where({id}).first();
+  return post;
 }
 
-function create() {
-  return Promise.resolve('create wired')
+async function create(newPost) {
+  const post = db('posts').insert(newPost);
+  return post;
 }
 
-function update() {
-  return Promise.resolve('update wired')
+function update(id, newData) {
+  return db('posts').update(newData).where({id});
 }
 
-function remove() {
-  return Promise.resolve('delete wired')
+function remove(id) {
+  return db('posts').del().where({ id });
 }
