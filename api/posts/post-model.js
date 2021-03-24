@@ -15,8 +15,9 @@ async function get() {
   // return Promise.resolve('get wired')
 }
 
-function getById() {
-  return Promise.resolve('getById wired')
+function getById(id) {
+  const post = db('posts').where({id}).first();
+  return post;
 }
 
 function create() {
