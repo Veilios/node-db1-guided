@@ -33,22 +33,22 @@ router.get('/', async (req, res, next) => {
   }
 })
 
-router.get('/:id', checkId, async (req, res, next) => {
+router.get('/:id', checkId, (req, res, next) => {
   res.status(200).json(req.post);
 })
 
 router.post('/', checkPayload, async (req, res, next) => {
   try {
-    const data = await Post.create()
+    const data = await Post.create(req.body);
     res.json(data)
   } catch (err) {
     next(err)
   }
 })
 
-router.put('/:id', checkPayload, checkId, async (req, res,next ) => {
+router.put('/:id', checkPayload, checkId, async (req, res, next ) => {
   try {
-    const data = await Post.update()
+    const data = await Post.update(req.params.id, req.body);
     res.json(data)
   } catch (err) {
     next(err)

@@ -20,14 +20,15 @@ function getById(id) {
   return post;
 }
 
-function create() {
-  return Promise.resolve('create wired')
+async function create(newPost) {
+  const post = db('posts').insert(newPost);
+  return post;
 }
 
-function update() {
-  return Promise.resolve('update wired')
+function update(id, newData) {
+  return db('posts').update(newData).where({id});
 }
 
 function remove() {
-  return Promise.resolve('delete wired')
+  return db('posts').del().where({ id });
 }
