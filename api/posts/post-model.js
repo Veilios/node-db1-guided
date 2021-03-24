@@ -29,6 +29,6 @@ function update(id, newData) {
   return db('posts').update(newData).where({id});
 }
 
-function remove() {
+function remove(id) {
   return db('posts').del().where({ id });
 }

@@ -57,7 +57,7 @@ router.put('/:id', checkPayload, checkId, async (req, res, next ) => {
 
 router.delete('/:id', checkId, async (req, res, next) => {
   try {
-    const data = await Post.remove()
+    const data = await Post.remove(req.params.id)
     res.json(data)
   } catch (err) {
     next(err)
